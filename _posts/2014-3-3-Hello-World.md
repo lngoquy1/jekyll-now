@@ -6,7 +6,7 @@ published: true
 
 This post serves as a reflection on microservices infrastructure things I learned during my first job as a backend software engineer at Salesforce’s Infrastructure Secrets. I got to work on cloud infrastructure, some CI/CD, and some data security things like metrics, alerts and monitoring, and HashiCorp Vault. I found that while trying to close stories on sprint boards, I didn’t get the chance to dive deeper into the things I work with, or question design/workflow decisions. Having a week in between my last job and Twitter, I think it’d be nice to reflect a little and look into things I was confused about before but had to brush over for time crunch reasons. Instead of just citing readings to support my opinions (which are neither truly original nor well thought out), I will try to cite some youtube videos I really enjoyed watching as well. This post is definitely not sponsored by InfoQ, I just have been binging it with a passion for some months.
 
-![Screen Shot 2021-02-19 at 2.31.15 PM.png]({{site.baseurl}}/_posts/Screen Shot 2021-02-19 at 2.31.15 PM.png)
+![image](https://user-images.githubusercontent.com/17346982/108554866-b3c22880-72c2-11eb-941e-cc5b555f5db9.png) 
 _My view from the Salesforce Bellevue office's coffee bar on a pretty day_
 
 I worked in infrastructure, meaning dealing with how to deploy applications on the cloud, commercial, or first-party -- during my time at Salesforce those were very briefly GCP, AWS, and a bit of 1P.  
@@ -20,7 +20,8 @@ When the order of provisioning infrastructure and containerized applications mat
 
 * These pipelines can be terraformed, or templatized for per cluster, per region (any parameters available really), scheduled to run in a CRON job, or by triggers, and there’re helper stage configurations, metrics about a pipeline’s state and function evaluators to pause, halt or rollback deployment. 
 
-![Screen Shot 2021-02-19 at 2.36.00 PM.png]({{site.baseurl}}/_posts/Screen Shot 2021-02-19 at 2.36.00 PM.png)
+![image](https://user-images.githubusercontent.com/17346982/108554957-d0f6f700-72c2-11eb-9397-88e8b8883dda.png)
+
 
 
 ## Terraform
@@ -34,7 +35,7 @@ Somewhat like a git diff (Git and Terraform have a lot of similarities) isn't it
 
 * Next step is `terraform apply`, which will actually carry out those CRUD (minus the R) operations planned before. This is actually the stage at which real infrastructure elements are compared against deployed ones, i.e. if you plan to create a new S3 bucket with the same name that an existing one already claimed, `terraform apply` will fail. Otherwise, happy-path wise, you will end up with some output like this. There are definitely dangers in doing this locally, e.g. you and your co-worker start running `terraform apply` at the same time. 
 
-![Screen Shot 2021-02-19 at 2.35.15 PM.png]({{site.baseurl}}/_posts/Screen Shot 2021-02-19 at 2.35.15 PM.png)
+![image](https://user-images.githubusercontent.com/17346982/108554912-c2104480-72c2-11eb-861b-2452832b9355.png)
 
 
 * To clean up testing resources, it’s best to do a `terraform destroy`. Running these terraform commands in CLI, and then making changes to actual resources to test out the configurations might seem inadequate for reproducibility, and that’s why there’s a better way to do this, with terratest, which allows writing tests in Go to assert expected outputs of terraform plans.
