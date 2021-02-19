@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Things I learned about microservices infrastructure - Spinnaker & Terraform '
+title: 'CI/CD with Spinnaker and Terraform '
 published: true
 ---
 
@@ -46,7 +46,7 @@ There might be some info you might rather not have revealed in terraform state (
 
 ## What's next?
 
-I promised youtube video citations, but so far we've got only 1, but I guarantee you more for Kubernetes for CI/CD, and a bit of Go and HashiCorp Vault.  
+I promised youtube video citations, but so far we've got only 1, but I guarantee you more for Kubernetes, a bit of Go, and HashiCorp Vault.  
 
 
 
